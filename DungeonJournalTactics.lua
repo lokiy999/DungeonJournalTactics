@@ -7,13 +7,31 @@
 -- is handed to DungeonJournal via DungeonJournal_RegisterTactics(bossKey, data)
 -- so it can show a "Tactics" button on the matching boss.
 --
--- data = { title = "...", lines = { ... } }
+-- data = { title = "...", lines = { ... }, resistances = { ... } (optional) }
 -- Each entry in `lines` is either:
 --   "a paragraph of body text"
 --   { separator = true, name = "Section label", color = "ffRRGGBB" (optional) }
 -- matching the same separator shape DungeonJournal's own ability lists use
 -- (see AGENTS.md's Data model) - a section header renders as a colored bar,
 -- with the following plain-string entries as its body until the next one.
+--
+-- `resistances` (optional) drives the "FR: 315 recommended" part of the
+-- Broadcast button's header line - keyed the same as a boss/pack's `stats`
+-- table (fire/frost/nature/shadow/arcane), value is the recommended amount
+-- OR { amount = 315, note = "buffed" } to append a short parenthesized
+-- note. Holds as many schools as needed, e.g. resistances = { fire = 315,
+-- nature = 200 } for a fight that wants both. Omit entirely if no
+-- particular resistance is worth calling out.
+--
+-- bsep(name) marks a broadcast section: a separator with broadcast = true.
+-- Everything under it (until the next separator, broadcast or not) is
+-- exactly what the Broadcast button sends to raid/party chat instead of
+-- its default auto-summary (every warning ability + every tactics line) -
+-- and it renders green in the Tactics panel so you can see precisely what
+-- will go out before clicking Broadcast. Use this to keep `lines` as the
+-- full writeup you explain over voice, while hand-picking only the
+-- wipe-mechanic essentials worth putting in chat. If an entry has no
+-- bsep() section, Broadcast falls back to the auto-summary.
 --
 -- Source: "Tips_Tricks about 40-man content for RL.docx" (Peach's Guide to
 -- World Bosses / Addendum 1: Peach's Guide to Molten Core), transcribed
@@ -26,6 +44,10 @@
 
 local function sep(name)
     return { separator = true, name = name }
+end
+
+local function bsep(name)
+    return { separator = true, name = name, broadcast = true }
 end
 
 local TACTICS = {
@@ -169,27 +191,10 @@ local TACTICS = {
     lucifron = {
         title = "Lucifron",
         lines = {
-            sep("Forming"),
-            "Promote a paladin to handle blessings and judgements.",
-            "BoK, BoS/Sanctuary/BoL, BoM/BoW required.",
-            "Judgement priority - JoW > JoL > JoC.",
-            "Assign a warlock to handle curses - CoS (arcane + shadow pen) > CoR (armor pen) > CoE (nature pen).",
-            "Need improved Faerie Fire druid (boomkin/resto).",
-            "Need improved Thunder Clap (arms/tank).",
-            "Need improved Demoralizing Roar (feral tank).",
-            "Need Find Weakness hunter (survival).",
-            "Need a carrion bird/owl/bat pet for Screech.",
-            "Need an inspiration priest.",
-            "Need an ancestral healing shaman.",
-            "Assign Sacrifice (Guardian's Favor paladin) + Soulstone/Life (Chain Heal or resto shaman) for the dogs.",
-            "Improved Defensive Aura (paladin)?",
-            "Guardian Totems (shaman)?",
             sep("Pre-pull"),
-            "Buff spell power.",
-            "Track Impending Doom and Lucifron's Curse.",
-            "Assign tanks (5-6), dispellers (all healers that can dispel and are not MT healers), decursers (ALL mages, resto druids, and boomkins), and boss ToT healers (2).",
+            "Assign tanks (5), dispellers (all healers that can dispel and are not MT healers), decursers (ALL mages, resto druids, and boomkins), and boss ToT healers (2).",
             sep("Adds"),
-            "Assign up to 2 tanks to each.",
+            "Assign 2 tanks to each.",
             "Priority-kill one by one.",
             "NO AoE - Mind Control.",
             "Spread them out - Whirlwind.",
@@ -482,6 +487,7 @@ local TACTICS = {
 
     ragnaros = {
         title = "Ragnaros",
+        resistances = { fire = { amount = 200, note = "buffed" } },
         lines = {
             sep("Pre-pull"),
             "Clear the first room of UBRS for the Fire Resist buff, save 1 spellbinder.",
@@ -497,7 +503,19 @@ local TACTICS = {
             "Submerge - everyone but the MTs and heals move onto the MT, start stacking before Submerge.",
             "Stack all Sons of Flame and AoE them down - do not CC, do not slow. Each Son alive at the end will heal Rag.",
             "Casters and healers stay back from the AoE Mana Drain.",
+            bsep("Broadcast"),
+            "Melee out before Knockback, stack for Submerge.",
+            "Stack + AoE all Sons of Flame - do NOT let any survive, they heal Rag.",
         },
+    },
+
+    -- Blackwing Lair test entry - resistances-only, no tactics text yet.
+    -- Ebonroc and Flamegor are fought together as one encounter (BWL.lua's
+    -- "ebonroc_flamegor" key), so one entry covers both.
+    ebonroc_flamegor = {
+        title = "Ebonroc & Flamegor",
+        resistances = { fire = 200, shadow = 200 },
+        lines = {},
     },
 }
 
