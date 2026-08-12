@@ -37,17 +37,14 @@ local TACTICS = {
     kurinnaxx = {
         title = "Kurinnaxx",
         lines = {
-            "If there are dps paladins, assign 1 of them to always do Judgement of Wisdom.",
             sep("Pre-pull"),
             "Scout him out.",
             "Poison Cleanse totem in tank group.",
-            "Track Poison Bolt Volley.",
-            "Track Mortal Wound.",
             sep("Mechanics"),
             "Do not stand behind Kuri - Tail Swipe.",
             "Do not stand in front of Kuri unless you are tanking - ranged Poison Bolt Volley.",
             "All dps and healers should be positioned at Kuri's left or right side.",
-            "Move away from Sand Trap or you will be silenced (Sand Trap) for 20s.",
+            "Move away from Sand Trap or you will be silenced for 20s.",
             "Cleanse poison/totem - Poison Bolt Volley.",
             "Stop dps on Charge.",
             "Tanks taunt off each other at three to five stacks of Mortal Wound.",
@@ -63,7 +60,7 @@ local TACTICS = {
             sep("Pre-pull"),
             "Assign 2 dispellers.",
             "Assign 1-2 resto druids for Deep Freeze.",
-            "Use GFPP.",
+            "Use GFrPP.",
             "Track Deep Freeze.",
             sep("Mechanics"),
             "Do not stand in front unless you are tanking him - Frost Breath.",
@@ -83,9 +80,6 @@ local TACTICS = {
         lines = {
             sep("Pre-pull"),
             "Mark melee for Meteor.",
-            "Assign a dispeller and a decurser.",
-            "Track Mark of Kazzak.",
-            "Track Twisted Reflection.",
             sep("Mechanics"),
             "Do not fall below 2k mana.",
             "Decurse Mark of Kazzak - drains mana over time; if the target goes oom with the debuff, they will explode.",
@@ -95,7 +89,6 @@ local TACTICS = {
             "Shadow Bolt Volley - AoE shadow bolts that hit everyone, ignoring line of sight.",
             "Melee dps must stay at max range from behind - Meteor (AoE knockback that could hit the tank) plus frontal Cleave.",
             "Dispel Twisted Reflection - heals Kazzak when damage is dealt to the target.",
-            "Dispel Thunderclap from the MT, and assign a dedicated dispeller for all high-value melee dps.",
         },
     },
 
@@ -110,9 +103,6 @@ local TACTICS = {
             "Nature Resist + Fire Resist totem in MT's group.",
             "Sonic Lash is nature damage, Lash of Pain is fire damage.",
             "Shaman and/or hunter in each group.",
-            "Track Bloating Toxins.",
-            "Track Flesh Explosion.",
-            "Track Curse of Weakness.",
             sep("Adds"),
             "OTs must pull.",
             "Tanks must taunt off each other at 3 stacks of Sunder Armor.",
@@ -143,7 +133,7 @@ local TACTICS = {
             "Melee move out if you're low, wait for heals/bandage - Fire Nova/Cleave.",
             sep("Pre-pull"),
             "Use GFPP.",
-            "Stack on 1 side if able; otherwise make sure there is at least a tank/healer on the other side.",
+            "Stack on 1 side.",
             "Mark a star for moving on pull.",
             "Tremor totem + Fire Resist totem + Devotion Aura in MT group.",
             "Track Threatening Gaze.",
@@ -194,45 +184,6 @@ local TACTICS = {
             "Assign Sacrifice (Guardian's Favor paladin) + Soulstone/Life (Chain Heal or resto shaman) for the dogs.",
             "Improved Defensive Aura (paladin)?",
             "Guardian Totems (shaman)?",
-            sep("Patrol - Lava Surger"),
-            "Stack and banish - charges.",
-            "Heal through Flamestrike.",
-            "Magic debuff (Magma Shackles) that slows.",
-            sep("Patrol - Ancient Core Hound"),
-            "Pre-shield tanks - Vicious Bite (hateful strike).",
-            "Cannot be avoided or dodged; needs armor + stamina for OTs.",
-            "Do not dispel/decurse in combat - applies a random debuff.",
-            "BoS + Soulstone/Life up on tanks for Disorient.",
-            "2 MTs in front, rest to the side facing away from the raid - Flamebreath.",
-            "Bleed debuff on tanks - Serrated Bite.",
-            sep("Trash - Molten Giant"),
-            "Up to 3 tanks on each - Knockaway.",
-            "Spread them out - Cleave.",
-            sep("Trash - Lava Annihilator"),
-            "Burst down - explodes.",
-            "Banish and spread if more than 1 mob.",
-            "Stacking debuff on tank that increases physical damage taken.",
-            "Stop dps on threat drop.",
-            sep("Trash - Fire Lord"),
-            "Priority-kill the spawn (cannot be AoE'd).",
-            "Pull away from the tank on Conflagration.",
-            "Keep HoTs up on the Soul Burn target - big DoT plus silence.",
-            sep("Trash - Molten Destroyer"),
-            "Pre-shield tanks, tanks must move together on pull - Hateful Strike.",
-            "Kill the destroyer first (best tanks).",
-            "Spread them out - AoE knockdown.",
-            "Big heals - Pyroblast on tanks.",
-            sep("Boss trash - Flame Imps"),
-            "Pre-shield tank.",
-            "Tank should use as much thorns damage as possible.",
-            "Melee stay out - Fire Nova.",
-            "Do not pull threat, small heals only, wait on AoE.",
-            sep("Boss trash - Core Hound x5"),
-            "Assign 1 tank to each.",
-            "Must all die at the same time or they revive.",
-            "Face away from raid and other tanks - Flame Breath.",
-            "Tanks save taunt for threat drops and Piercing Howl.",
-            "Bleed debuff on tanks - Serrated Bite.",
             sep("Pre-pull"),
             "Buff spell power.",
             "Track Impending Doom and Lucifron's Curse.",
@@ -246,6 +197,89 @@ local TACTICS = {
             "Dispel Impending Doom - 2k shadow damage when the debuff expires.",
             "Decurse Lucifron's Curse, tanks before healers before the rest - abilities become more expensive.",
             "Taunt rotation - stacking debuff on the MT, swap at 3 stacks.",
+        },
+    },
+
+    -- Patrols and boss-room trash on the way to/around Lucifron, split into
+    -- their own entries (registered under their MC.lua trash keys) so each
+    -- pack gets its own Tactics button in the Trash view instead of being
+    -- bundled into Lucifron's.
+    lava_surger = {
+        title = "Lava Surger",
+        lines = {
+            "Stack and banish - charges.",
+            "Heal through Flamestrike.",
+            "Magic debuff (Magma Shackles) that slows.",
+        },
+    },
+
+    ancient_core_hound = {
+        title = "Ancient Core Hound",
+        lines = {
+            "Pre-shield tanks - Vicious Bite (hateful strike).",
+            "Cannot be avoided or dodged; needs armor + stamina for OTs.",
+            "Do not dispel/decurse in combat - applies a random debuff.",
+            "BoS + Soulstone/Life up on tanks for Disorient.",
+            "2 MTs in front, rest to the side facing away from the raid - Flamebreath.",
+            "Bleed debuff on tanks - Serrated Bite.",
+        },
+    },
+
+    molten_giant = {
+        title = "Molten Giant",
+        lines = {
+            "Up to 3 tanks on each - Knockaway.",
+            "Spread them out - Cleave.",
+        },
+    },
+
+    lava_annihilator = {
+        title = "Lava Annihilator",
+        lines = {
+            "Burst down - explodes.",
+            "Banish and spread if more than 1 mob.",
+            "Stacking debuff on tank that increases physical damage taken.",
+            "Stop dps on threat drop.",
+        },
+    },
+
+    firelord = {
+        title = "Fire Lord",
+        lines = {
+            "Priority-kill the spawn (cannot be AoE'd).",
+            "Pull away from the tank on Conflagration.",
+            "Keep HoTs up on the Soul Burn target - big DoT plus silence.",
+        },
+    },
+
+    molten_destroyer = {
+        title = "Molten Destroyer",
+        lines = {
+            "Pre-shield tanks, tanks must move together on pull - Hateful Strike.",
+            "Kill the destroyer first (best tanks).",
+            "Spread them out - AoE knockdown.",
+            "Big heals - Pyroblast on tanks.",
+        },
+    },
+
+    flame_imp = {
+        title = "Flame Imps",
+        lines = {
+            "Pre-shield tank.",
+            "Tank should use as much thorns damage as possible.",
+            "Melee stay out - Fire Nova.",
+            "Do not pull threat, small heals only, wait on AoE.",
+        },
+    },
+
+    core_hound = {
+        title = "Core Hound x5",
+        lines = {
+            "Assign 1 tank to each.",
+            "Must all die at the same time or they revive.",
+            "Face away from raid and other tanks - Flame Breath.",
+            "Tanks save taunt for threat drops and Piercing Howl.",
+            "Bleed debuff on tanks - Serrated Bite.",
         },
     },
 
