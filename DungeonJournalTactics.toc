@@ -1,0 +1,7 @@
+## Interface: 11200
+## Title: DungeonJournal Tactics
+## Notes: Optional add-on providing strategy/tactics content for DungeonJournal bosses
+## Author: Claude
+## Dependencies: DungeonJournal
+
+DungeonJournalTactics.lua
