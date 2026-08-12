@@ -340,19 +340,13 @@ local TACTICS = {
     baron_geddon = {
         title = "Baron Geddon",
         lines = {
-            sep("Trash - Firewalker"),
-            "1 Fire Resist/avoidance tank.",
-            "Heal the Fireblossom target.",
+            -- CHANGED: Fireguard has no matching trash key in MC.lua (not one
+            -- of the packs the addon currently tracks), so it stays here
+            -- rather than being split into its own entry like its neighbors.
             sep("Trash - Fireguard"),
             "1-2 Fire Resist/avoidance tank(s).",
             "Fire Prison second on threat.",
             "Tank away from Lava Elementals - Melt Armor hits nearby targets.",
-            sep("Trash - Lava Elemental"),
-            "2 tanks on each (assign a banisher if not enough tanks).",
-            "Face away from the raid - Pyroclast Barrage stun plus big DoT.",
-            "Tanks stay 90 degrees from each other.",
-            sep("Trash - Lava Reaver"),
-            "Watch for threat drops.",
             sep("Pre-pull"),
             "Use GFPP.",
             "Mark ranged and melee for stacking.",
@@ -368,6 +362,33 @@ local TACTICS = {
             "Melee out during Inferno.",
             "Move out of Molten Ground.",
             "Line of sight the Last Service adds.",
+        },
+    },
+
+    -- Trash on the way to/around Baron Geddon, split into their own entries
+    -- (registered under their MC.lua trash keys) the same way Lucifron's
+    -- patrols were - see lava_surger/etc. above.
+    firewalker = {
+        title = "Firewalker",
+        lines = {
+            "1 Fire Resist/avoidance tank.",
+            "Heal the Fireblossom target.",
+        },
+    },
+
+    lava_elemental = {
+        title = "Lava Elemental",
+        lines = {
+            "2 tanks on each (assign a banisher if not enough tanks).",
+            "Face away from the raid - Pyroclast Barrage stun plus big DoT.",
+            "Tanks stay 90 degrees from each other.",
+        },
+    },
+
+    lava_reaver = {
+        title = "Lava Reaver",
+        lines = {
+            "Watch for threat drops.",
         },
     },
 
