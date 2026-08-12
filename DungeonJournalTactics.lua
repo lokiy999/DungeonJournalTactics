@@ -33,6 +33,18 @@
 -- wipe-mechanic essentials worth putting in chat. If an entry has no
 -- bsep() section, Broadcast falls back to the auto-summary.
 --
+-- rw(text) marks ONE line inside a bsep() section as a raid warning: it's
+-- sent via /rw (RAID_WARNING) instead of /raid, and renders bold/red in the
+-- Tactics panel preview so it's visually distinct before you click
+-- Broadcast. There's no fixed format for the text - write whatever's
+-- clearest for that fight - but `{boss}` in the text is substituted with
+-- the boss's display name at send/preview time, so a line can be written
+-- generically. Example (Baron Geddon):
+--   rw("{boss}: [SKULL] Living Bomb -> RUN OUT | [CROSS] Spreading Flames -> STACK ON SQUARE"),
+-- Only one rw() line is expected per fight (it's meant for THE wipe
+-- mechanic callout) - every other line in the bsep() section is still sent
+-- as a normal /raid message.
+--
 -- Source: "Tips_Tricks about 40-man content for RL.docx" (Peach's Guide to
 -- World Bosses / Addendum 1: Peach's Guide to Molten Core), transcribed
 -- close to verbatim - only obvious typos and stray markup fixed (curly
@@ -48,6 +60,10 @@ end
 
 local function bsep(name)
     return { separator = true, name = name, broadcast = true }
+end
+
+local function rw(text)
+    return { warning = true, text = text }
 end
 
 local TACTICS = {
@@ -367,6 +383,9 @@ local TACTICS = {
             "Melee out during Inferno.",
             "Move out of Molten Ground.",
             "Line of sight the Last Service adds.",
+            bsep("Broadcast"),
+            rw("{boss}: [SKULL] Living Bomb -> RUN OUT || [CROSS] Spreading Flames -> STACK ON SQUARE"),
+            "Melee out during Inferno, move out of Molten Ground.",
         },
     },
 
