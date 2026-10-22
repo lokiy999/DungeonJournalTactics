@@ -528,6 +528,14 @@ local TACTICS = {
         },
     },
 
+    loksey = {
+        title = "Loksey",
+        lines = {
+            sep("Mechanics"),
+            "Tank shaman should drop Tremor Totem - its Sleep immunity blocks Tranquilizing Poison's sleep, letting the tank keep their Frenzy effect instead of losing it.",
+        },
+    },
+
     -- Blackwing Lair test entry - resistances-only, no tactics text yet.
     -- Ebonroc and Flamegor are fought together as one encounter (BWL.lua's
     -- "ebonroc_flamegor" key), so one entry covers both.
